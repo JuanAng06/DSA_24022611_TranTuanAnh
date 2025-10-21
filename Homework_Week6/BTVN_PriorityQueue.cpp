@@ -17,22 +17,63 @@ struct PriorityQueue {
         if (owned) delete heap; // chỉ xóa nếu tự tạo
     }
 
+    /**
+     * @brief Thêm một phần tử vào hàng đợi ưu tiên.
+     *
+     * Hàm sẽ gọi `heap->insert(value)` để thêm phần tử mới vào heap bên trong.
+     * Phần tử sẽ tự động được sắp xếp lại để đảm bảo thứ tự ưu tiên đúng.
+     *
+     * @param value Giá trị cần chèn vào hàng đợi.
+     * @return true Nếu chèn thành công.
+     * @return false Nếu heap bên trong đã đầy.
+     */
     bool insert(int value) {
         return heap->insert(value);
     }
 
+    /**
+     * @brief Lấy và xóa phần tử có độ ưu tiên cao nhất khỏi hàng đợi.
+     *
+     * Hàm này gọi `heap->extractRoot()`, loại bỏ phần tử ở gốc của heap
+     * (phần tử có độ ưu tiên cao nhất).
+     * Nếu hàng đợi rỗng, hàm trả về `INT_MIN` (theo giá trị mặc định của Heap).
+     *
+     * @return Giá trị phần tử có độ ưu tiên cao nhất, hoặc `INT_MIN` nếu hàng đợi rỗng.
+     */
     int pop() {
         return heap->extractRoot();
     }
 
+    /**
+     * @brief Kiểm tra xem hàng đợi ưu tiên có rỗng không.
+     *
+     * @return true Nếu hàng đợi rỗng.
+     * @return false Nếu còn phần tử trong hàng đợi.
+     */
     bool isEmpty() {
         return heap->isEmpty();
     }
 
+    
+    /**
+     * @brief Truy cập phần tử có độ ưu tiên cao nhất mà không xóa nó.
+     *
+     * Hàm này gọi `heap->getRoot()` để lấy phần tử ở đỉnh heap
+     * (phần tử có độ ưu tiên cao nhất) mà không thay đổi cấu trúc.
+     *
+     * @return Giá trị phần tử có độ ưu tiên cao nhất.
+     */
     int top() {
         return heap->getRoot();
     }
 
+    /**
+     * @brief Lấy số lượng phần tử hiện có trong hàng đợi ưu tiên.
+     *
+     * Hàm này gọi `heap->size()` để trả về số phần tử hiện có trong heap.
+     *
+     * @return Số phần tử trong hàng đợi.
+     */
     int size() {
         return heap->size();
     }

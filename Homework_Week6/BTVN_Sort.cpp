@@ -77,8 +77,17 @@ void insertionSort(int *arr, int n) {
     }
 }
 
-
-// Hàm trộn hai mảng con đã được sắp xếp
+/**
+ * @brief Trộn hai mảng con đã được sắp xếp thành một mảng duy nhất theo thứ tự tăng dần.
+ *
+ * Hàm này chia mảng ban đầu thành hai phần (trái và phải), 
+ * sau đó trộn chúng lại theo thứ tự đã sắp xếp.
+ *
+ * @param arr  Mảng cần trộn (đã được chia thành hai phần con sắp xếp).
+ * @param left Chỉ số bắt đầu của mảng con bên trái.
+ * @param mid  Chỉ số giữa (kết thúc của mảng con bên trái).
+ * @param right Chỉ số kết thúc của mảng con bên phải.
+ */
 void merge(int *arr, int left, int mid, int right) {
     int n1 = mid - left + 1;  // Số phần tử mảng trái
     int n2 = right - mid;     // Số phần tử mảng phải
@@ -112,7 +121,19 @@ void merge(int *arr, int left, int mid, int right) {
     delete[] R;
 }
 
-// Hàm Merge Sort chính
+/**
+ * @brief Thuật toán Merge Sort (sắp xếp trộn).
+ *
+ * Hàm sắp xếp mảng bằng cách chia mảng thành hai nửa, sắp xếp từng nửa 
+ * rồi trộn lại bằng hàm merge().
+ *
+ * @param arr  Mảng cần sắp xếp.
+ * @param left Chỉ số bắt đầu của đoạn cần sắp xếp.
+ * @param right Chỉ số kết thúc của đoạn cần sắp xếp.
+ *
+ * @note Độ phức tạp thời gian trung bình, tốt và tệ nhất: O(log n)
+ *       Độ phức tạp không gian: O (n)
+ */
 void mergeSort(int arr[], int left, int right) {
     if (left < right) {
         int mid = (left + right) / 2;
@@ -126,8 +147,19 @@ void mergeSort(int arr[], int left, int right) {
     }
 }
 
-// Hàm partition (phân hoạch)
-// Trả về vị trí chính xác của pivot sau khi phân hoạch
+/**
+ * @brief Phân hoạch mảng theo thuật toán Quick Sort.
+ *
+ * Chọn phần tử pivot (mặc định là phần tử cuối cùng), 
+ * sau đó sắp xếp lại mảng sao cho:
+ * - Các phần tử nhỏ hơn pivot nằm bên trái.
+ * - Các phần tử lớn hơn pivot nằm bên phải.
+ *
+ * @param arr  Mảng cần phân hoạch.
+ * @param low  Chỉ số bắt đầu của đoạn cần phân hoạch.
+ * @param high Chỉ số kết thúc của đoạn cần phân hoạch.
+ * @return int  Vị trí chính xác của pivot sau khi phân hoạch.
+ */
 int partition(int *arr, int low, int high) {
     int pivot = arr[high];   // Chọn pivot là phần tử cuối
     int i = low - 1;         // Vị trí nhỏ hơn pivot
@@ -145,7 +177,22 @@ int partition(int *arr, int low, int high) {
     return i + 1;
 }
 
-// Hàm quicksort (đệ quy)
+/**
+ * @brief Thuật toán Quick Sort (sắp xếp nhanh).
+ *
+ * Hàm sắp xếp mảng bằng cách chia mảng thành hai phần quanh một pivot,
+ * sau đó đệ quy sắp xếp từng phần.
+ *
+ * @param arr  Mảng cần sắp xếp.
+ * @param low  Chỉ số bắt đầu của đoạn cần sắp xếp.
+ * @param high Chỉ số kết thúc của đoạn cần sắp xếp.
+ *
+ * @note Độ phức tạp thời gian tốt nhất và trung bình: O(n log(n)) - Chia mảng cân bằng
+ *       Độ phức tạp thời gian tệ nhất: O(n²) - Chia mảng lệch hẳn (Mảng gần như sắp xếp / Pivot ở đầu / cuối)
+ *       Độ phức tạp không gian trung bình: O(log n)
+ *       Độ phức tạp không gian tệ nhất: O(n)
+ *       
+ */
 void quickSort(int *arr, int low, int high) {
     if (low < high) {
         // Tìm vị trí phân hoạch
@@ -176,6 +223,8 @@ int main() {
     int arr1[] = {64, 25, 12, 22, 11};
     int arr2[] = {64, 25, 12, 22, 11};
     int arr3[] = {64, 25, 12, 22, 11};
+    int arr4[] = {64, 25, 12, 22, 11};
+    int arr5[] = {64, 25, 12, 22, 11};
     int n = sizeof(arr1) / sizeof(arr1[0]);
 
     cout << "Mang ban dau: ";
@@ -192,6 +241,14 @@ int main() {
     insertionSort(arr3, n);
     cout << "Sau Insertion Sort: ";
     printArray(arr3, n);
+
+    mergeSort(arr4, 0, n - 1);
+    cout << "Sau Merge Sort: ";
+    printArray(arr4, n);
+
+    quickSort(arr5, 0, n - 1);
+    cout << "Sau Quick Sort: ";
+    printArray(arr5, n);
 
     return 0;
 }
